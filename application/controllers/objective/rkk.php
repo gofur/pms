@@ -1070,7 +1070,7 @@ class Rkk extends Controller {
 		$rkk    = $this->rkk_model3->get_rkk_row($rkk_id);
 		$begin  = substr($rkk->BeginDate, 0,10);
 		$end    = substr($rkk->EndDate, 0,10);
-		echo trim($begin.'|'.$end);		
+		echo trim($begin.'|'.$end);
 	}
 
 	public function cascade_kpi_process()

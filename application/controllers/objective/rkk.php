@@ -162,10 +162,19 @@ class Rkk extends Controller {
 					switch ($rkk->statusFlag) {
 						case 0:
 							# DRAFT
+							if ($this->session->userdata("roleID") == 4) {
+								redirect('objective/rkk/self_rkk/'.$rkk->RKKID);
 
-							$data['notif_type'] = 'alert-error';
-							$data['notif_text'] = 'RKK not Final';
-							$this->load->view('template/notif_view', $data, FALSE);
+							} else if ($this->session->userdata("roleID") == 7) {
+								redirect('objective/rkk/self_rkk/'.$rkk->RKKID);
+
+							}  else {
+								$data['notif_type'] = 'alert-error';
+								$data['notif_text'] = 'RKK not final';
+								$this->load->view('template/notif_view', $data, FALSE);
+
+							}
+
 
 							break;
 						case 1:

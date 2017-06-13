@@ -162,10 +162,19 @@ class Rkk extends Controller {
 					switch ($rkk->statusFlag) {
 						case 0:
 							# DRAFT
+							if ($this->session->userdata("roleID") == 4) {
+								redirect('objective/rkk/self_rkk/'.$rkk->RKKID);
 
-							$data['notif_type'] = 'alert-error';
-							$data['notif_text'] = 'RKK not Final';
-							$this->load->view('template/notif_view', $data, FALSE);
+							} else if ($this->session->userdata("roleID") == 7) {
+								redirect('objective/rkk/self_rkk/'.$rkk->RKKID);
+
+							}  else {
+								$data['notif_type'] = 'alert-error';
+								$data['notif_text'] = 'RKK not final';
+								$this->load->view('template/notif_view', $data, FALSE);
+
+							}
+
 
 							break;
 						case 1:
@@ -1070,7 +1079,7 @@ class Rkk extends Controller {
 		$rkk    = $this->rkk_model3->get_rkk_row($rkk_id);
 		$begin  = substr($rkk->BeginDate, 0,10);
 		$end    = substr($rkk->EndDate, 0,10);
-		echo trim($begin.'|'.$end);		
+		echo trim($begin.'|'.$end);
 	}
 
 	public function cascade_kpi_process()
